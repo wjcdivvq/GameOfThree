@@ -32,4 +32,25 @@ public class PlayerTest {
         assertThat(player.makeMoveRespondingTo(84935) * 3).isEqualTo(84936);
     }
 
+
+    @Test
+    void shouldRespondToMoveBySubtractingOne() {
+        Player player = new Player(0);
+
+        assertThat(player.makeMoveRespondingTo(10) * 3).isEqualTo(9);
+        assertThat(player.makeMoveRespondingTo(16) * 3).isEqualTo(15);
+        assertThat(player.makeMoveRespondingTo(85) * 3).isEqualTo(84);
+        assertThat(player.makeMoveRespondingTo(84937) * 3).isEqualTo(84936);
+    }
+
+    @Test
+    void shouldRespondToMoveByAddingNothing() {
+        Player player = new Player(0);
+
+        assertThat(player.makeMoveRespondingTo(9) * 3).isEqualTo(9);
+        assertThat(player.makeMoveRespondingTo(15) * 3).isEqualTo(15);
+        assertThat(player.makeMoveRespondingTo(84) * 3).isEqualTo(84);
+        assertThat(player.makeMoveRespondingTo(84936) * 3).isEqualTo(84936);
+    }
+
 }
