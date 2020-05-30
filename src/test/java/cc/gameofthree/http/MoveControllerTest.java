@@ -22,7 +22,7 @@ class MoveControllerTest {
     @BeforeEach
     void before() {
         when(moveApi.playerDidMove(anyInt())).thenReturn(Mono.empty());
-        moveController = new MoveController(moveApi);
+        moveController = new MoveController(moveApi, "app1");
     }
 
     @Test

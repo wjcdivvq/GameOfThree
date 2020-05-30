@@ -1,6 +1,7 @@
 package cc.gameofthree.http;
 
 import cc.gameofthree.player.Player;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,9 +12,13 @@ import reactor.core.publisher.Mono;
 public class MoveController {
     private final Player player = new Player();
     private final MoveClient moveApi;
+    private final String applicationName;
 
-    public MoveController(MoveClient moveApi) {
+    public MoveController(
+            MoveClient moveApi,
+            @Value("${applicationName:app1}") String applicationName) {
         this.moveApi = moveApi;
+        this.applicationName = applicationName;
     }
 
     @PostMapping(value = "/playerDidMove", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
@@ -30,7 +35,7 @@ public class MoveController {
         if (!move.hasWon()) {
             moveApi.playerDidMove(move.getNumber()).subscribe();
         } else {
-            System.out.println("I won");
+            System.out.println(String.format("I am application '%s' and my player won.", applicationName));
         }
     }
 
