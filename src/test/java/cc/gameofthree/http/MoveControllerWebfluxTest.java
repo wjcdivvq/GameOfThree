@@ -18,7 +18,7 @@ class MoveControllerWebfluxTest {
         webClient.post()
                 .uri("/playerDidMove")
                 .contentType(MediaType.TEXT_PLAIN)
-                .bodyValue(4)
+                .bodyValue("4")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(String.class).isEqualTo("Received your move '4'");
