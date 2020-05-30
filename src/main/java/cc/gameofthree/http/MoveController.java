@@ -27,7 +27,8 @@ public class MoveController {
 
         makeMove(firstMove);
 
-        return Mono.just(String.format("Started game with number '%s'", firstMove));
+        return Mono.just(String.format("Started game with number '%s'", firstMove))
+                .doOnNext(System.out::println);
     }
 
     @PostMapping(value = "/playerDidMove", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
