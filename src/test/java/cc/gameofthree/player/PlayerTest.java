@@ -1,17 +1,25 @@
 package cc.gameofthree.player;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PlayerTest {
-	@Test
-	void shouldStartTheGameWithANumber() {
-		Player player = new Player();
+    @Test
+    void shouldStartTheGameWithRandomNumber() {
+        Player player = new Player(0);
 
-		int firstNumber = player.startGameWithRandomNumber();
+        List<Integer> startingNumbers = IntStream.range(0, 5)
+                .boxed()
+                .map(x -> player.startGameWithRandomNumber())
+                .collect(Collectors.toList());
 
-		assertThat(firstNumber).isEqualTo(3);
-	}
+        assertThat(startingNumbers)
+                .containsExactly(60, 48, 29, 47, 15);
+    }
 
 }
