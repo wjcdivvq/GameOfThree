@@ -22,4 +22,15 @@ public class PlayerTest {
                 .containsExactly(60, 48, 29, 47, 15);
     }
 
+    @Test
+    void shouldRespondMoveByMakingTheNumberDivisibleByThree() {
+        Player player = new Player(0);
+
+        assertThat(player.makeMoveRespondingTo(10) % 3).isZero();
+        assertThat(player.makeMoveRespondingTo(15) % 3).isZero();
+        assertThat(player.makeMoveRespondingTo(18) % 3).isZero();
+        assertThat(player.makeMoveRespondingTo(85) % 3).isZero();
+        assertThat(player.makeMoveRespondingTo(84937) % 3).isZero();
+    }
+
 }

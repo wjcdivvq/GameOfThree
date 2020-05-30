@@ -16,4 +16,8 @@ public class Player {
 	public int startGameWithRandomNumber() {
 		return random.nextInt(100); // TODO make configurable
 	}
+
+	public int makeMoveRespondingTo(int i) {
+		return 3;
+	}
 }
