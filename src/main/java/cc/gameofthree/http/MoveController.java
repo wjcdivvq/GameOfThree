@@ -18,18 +18,22 @@ public class MoveController {
 
     @PostMapping(value = "/playerDidMove", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> playerDidMove(@RequestBody String moveNumber) {
-        Player.MoveResult move = player.makeMoveRespondingTo(Integer.parseInt(moveNumber));
+        makeMove(Integer.parseInt(moveNumber));
+
+        String message = String.format("Received your move '%s'", moveNumber);
+
+        return Mono.just(message)
+                .doAfterTerminate(() -> System.out.println(message));
+    }
+
+    private void makeMove(int moveNumber) {
+        Player.MoveResult move = player.makeMoveRespondingTo(moveNumber);
 
         if (!move.hasWon()) {
             moveApi.playerDidMove(move.getNumber()).subscribe();
         } else {
             System.out.println("I won");
         }
-
-        String message = String.format("Received your move '%s'", moveNumber);
-
-        return Mono.just(message)
-                .doAfterTerminate(() -> System.out.println(message));
     }
 
 }
