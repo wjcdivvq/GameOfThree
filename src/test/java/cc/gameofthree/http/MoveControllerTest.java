@@ -1,22 +1,34 @@
 package cc.gameofthree.http;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Mono;
 
-@WebFluxTest(controllers = MoveController.class)
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 class MoveControllerTest {
-    @Autowired
-    WebTestClient webClient;
+    @Mock
+    MoveClient moveApi;
+
+    MoveController moveController;
+
+    @BeforeEach
+    void before() {
+        when(moveApi.playerDidMove(anyInt())).thenReturn(Mono.empty());
+        moveController = new MoveController(moveApi);
+    }
 
     @Test
-    void shouldAcceptMove() {
-        webClient.post()
-                .uri("/playerDidMove")
-                .bodyValue(4)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(String.class).isEqualTo("Received your move '4'");
+    void shouldRespondWithMove() {
+        moveController.playerDidMove("10").block();
+
+        verify(moveApi).playerDidMove(3);
     }
 }

@@ -21,7 +21,7 @@ public class Player {
         return new MoveResult((moveFromOtherPlayer + 1) / 3);
     }
 
-    static class MoveResult {
+    public static class MoveResult {
         private final int number;
 
         public MoveResult(int number) {
