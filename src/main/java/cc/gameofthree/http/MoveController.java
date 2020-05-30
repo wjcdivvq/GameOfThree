@@ -19,6 +19,7 @@ public class MoveController {
             @Value("${applicationName:app1}") String applicationName) {
         this.moveApi = moveApi;
         this.applicationName = applicationName;
+        System.out.println("Waiting for the game to start...");
     }
 
     @PostMapping("/startGame")
