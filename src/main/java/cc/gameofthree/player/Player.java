@@ -1,7 +1,6 @@
 package cc.gameofthree.player;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class Player {
 	private final Random random;

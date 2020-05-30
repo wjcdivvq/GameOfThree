@@ -1,5 +1,6 @@
 package cc.gameofthree.player;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,10 +10,15 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerTest {
+    Player player;
+
+    @BeforeEach
+    void before() {
+        player = new Player(0);
+    }
+
     @Test
     void shouldStartTheGameWithRandomNumber() {
-        Player player = new Player(0);
-
         List<Integer> startingNumbers = IntStream.range(0, 5)
                 .boxed()
                 .map(x -> player.startGameWithRandomNumber())
@@ -24,8 +30,6 @@ public class PlayerTest {
 
     @Test
     void shouldRespondToMoveByAddingOne() {
-        Player player = new Player(0);
-
         assertThat(player.makeMoveRespondingTo(8) * 3).isEqualTo(9);
         assertThat(player.makeMoveRespondingTo(14) * 3).isEqualTo(15);
         assertThat(player.makeMoveRespondingTo(83) * 3).isEqualTo(84);
@@ -35,8 +39,6 @@ public class PlayerTest {
 
     @Test
     void shouldRespondToMoveBySubtractingOne() {
-        Player player = new Player(0);
-
         assertThat(player.makeMoveRespondingTo(10) * 3).isEqualTo(9);
         assertThat(player.makeMoveRespondingTo(16) * 3).isEqualTo(15);
         assertThat(player.makeMoveRespondingTo(85) * 3).isEqualTo(84);
@@ -45,8 +47,6 @@ public class PlayerTest {
 
     @Test
     void shouldRespondToMoveByAddingNothing() {
-        Player player = new Player(0);
-
         assertThat(player.makeMoveRespondingTo(9) * 3).isEqualTo(9);
         assertThat(player.makeMoveRespondingTo(15) * 3).isEqualTo(15);
         assertThat(player.makeMoveRespondingTo(84) * 3).isEqualTo(84);
