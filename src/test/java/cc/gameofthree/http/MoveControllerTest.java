@@ -31,4 +31,11 @@ class MoveControllerTest {
 
         verify(moveApi).playerDidMove(3);
     }
+
+    @Test
+    void shouldStartTheGame() {
+        moveController.startGame().block();
+
+        verify(moveApi).playerDidMove(anyInt());
+    }
 }

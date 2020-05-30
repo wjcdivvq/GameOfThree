@@ -21,6 +21,15 @@ public class MoveController {
         this.applicationName = applicationName;
     }
 
+    @PostMapping("/startGame")
+    public Mono<String> startGame() {
+        int firstMove = player.startGameWithRandomNumber();
+
+        makeMove(firstMove);
+
+        return Mono.just(String.format("Started game with number '%s'", firstMove));
+    }
+
     @PostMapping(value = "/playerDidMove", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> playerDidMove(@RequestBody String moveNumber) {
         makeMove(Integer.parseInt(moveNumber));
