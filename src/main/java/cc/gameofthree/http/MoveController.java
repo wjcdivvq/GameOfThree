@@ -20,10 +20,8 @@ public class MoveController {
     public Mono<String> playerDidMove(@RequestBody String moveNumber) {
         makeMove(Integer.parseInt(moveNumber));
 
-        String message = String.format("Received your move '%s'", moveNumber);
-
-        return Mono.just(message)
-                .doAfterTerminate(() -> System.out.println(message));
+        return Mono.just(String.format("Received your move '%s'", moveNumber))
+                .doOnNext(System.out::println);
     }
 
     private void makeMove(int moveNumber) {
