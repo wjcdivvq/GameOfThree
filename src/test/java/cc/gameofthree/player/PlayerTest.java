@@ -30,27 +30,44 @@ public class PlayerTest {
 
     @Test
     void shouldRespondToMoveByAddingOne() {
-        assertThat(player.makeMoveRespondingTo(8) * 3).isEqualTo(9);
-        assertThat(player.makeMoveRespondingTo(14) * 3).isEqualTo(15);
-        assertThat(player.makeMoveRespondingTo(83) * 3).isEqualTo(84);
-        assertThat(player.makeMoveRespondingTo(84935) * 3).isEqualTo(84936);
+        assertThat(getMoveResultNumber(8) * 3).isEqualTo(9);
+        assertThat(getMoveResultNumber(14) * 3).isEqualTo(15);
+        assertThat(getMoveResultNumber(83) * 3).isEqualTo(84);
+        assertThat(getMoveResultNumber(84935) * 3).isEqualTo(84936);
     }
 
 
     @Test
     void shouldRespondToMoveBySubtractingOne() {
-        assertThat(player.makeMoveRespondingTo(10) * 3).isEqualTo(9);
-        assertThat(player.makeMoveRespondingTo(16) * 3).isEqualTo(15);
-        assertThat(player.makeMoveRespondingTo(85) * 3).isEqualTo(84);
-        assertThat(player.makeMoveRespondingTo(84937) * 3).isEqualTo(84936);
+        assertThat(getMoveResultNumber(10) * 3).isEqualTo(9);
+        assertThat(getMoveResultNumber(16) * 3).isEqualTo(15);
+        assertThat(getMoveResultNumber(85) * 3).isEqualTo(84);
+        assertThat(getMoveResultNumber(84937) * 3).isEqualTo(84936);
     }
 
     @Test
     void shouldRespondToMoveByAddingNothing() {
-        assertThat(player.makeMoveRespondingTo(9) * 3).isEqualTo(9);
-        assertThat(player.makeMoveRespondingTo(15) * 3).isEqualTo(15);
-        assertThat(player.makeMoveRespondingTo(84) * 3).isEqualTo(84);
-        assertThat(player.makeMoveRespondingTo(84936) * 3).isEqualTo(84936);
+        assertThat(getMoveResultNumber(9) * 3).isEqualTo(9);
+        assertThat(getMoveResultNumber(15) * 3).isEqualTo(15);
+        assertThat(getMoveResultNumber(84) * 3).isEqualTo(84);
+        assertThat(getMoveResultNumber(84936) * 3).isEqualTo(84936);
     }
 
+    @Test
+    void shouldWinWhenReachingNumberOne() {
+        int moveFromOtherPlayer = 4;
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber()).isEqualTo(1);
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).hasWon()).isTrue();
+    }
+
+    @Test
+    void shouldNotWhenWhenRespondingWithNumberOtherThanOne() {
+        int moveFromOtherPlayer = 5;
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber()).isEqualTo(2);
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).hasWon()).isFalse();
+    }
+
+    private int getMoveResultNumber(int moveFromOtherPlayer) {
+        return player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber();
+    }
 }
