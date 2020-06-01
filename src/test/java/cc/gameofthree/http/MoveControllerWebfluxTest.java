@@ -1,5 +1,6 @@
 package cc.gameofthree.http;
 
+import cc.gameofthree.player.Game;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -8,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @WebFluxTest(controllers = MoveController.class)
-@ContextConfiguration(classes = {MoveClient.class, MoveController.class})
+@ContextConfiguration(classes = {MoveClient.class, Game.class, MoveController.class})
 class MoveControllerWebfluxTest {
     @Autowired
     WebTestClient webClient;

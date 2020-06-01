@@ -1,5 +1,6 @@
-package cc.gameofthree.http;
+package cc.gameofthree.player;
 
+import cc.gameofthree.http.MoveClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,35 +13,35 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class MoveControllerTest {
+class GameTest {
     @Mock
     MoveClient moveApi;
 
-    MoveController moveController;
+    Game game;
 
     @BeforeEach
     void before() {
         when(moveApi.playerDidMove(anyInt())).thenReturn(Mono.empty());
-        moveController = new MoveController(moveApi, "app1");
+        game = new Game(moveApi, "app1");
     }
 
     @Test
     void shouldRespondWithMove() {
-        moveController.playerDidMove("10").block();
+        game.makeMove(10);
 
         verify(moveApi).playerDidMove(3);
     }
 
     @Test
     void shouldStartTheGameWithSpecifiedUpperBound() {
-        moveController.startGame("100").block();
+        game.makeGameStart(100);
 
         verify(moveApi).playerDidMove(anyInt());
     }
 
     @Test
-    void shouldStartTheGameWithoutUpperBound() {
-        moveController.startGame(null).block();
+    void shouldStartTheGameWithout() {
+        game.makeGameStart();
 
         verify(moveApi).playerDidMove(anyInt());
     }
