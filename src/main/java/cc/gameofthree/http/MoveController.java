@@ -25,9 +25,15 @@ public class MoveController {
     @PostMapping("/startGame")
     public Mono<String> startGame(@RequestBody String upperBoundAsString) {
         int upperBound = upperBoundAsString == null ? 100 : Integer.parseInt(upperBoundAsString);
-        int firstMove = player.startGameWithRandomNumber(upperBound);
+        Player.FirstMoveResult firstMove = player.startGameWithRandomNumber(upperBound);
 
-        makeMove(firstMove);
+        if (firstMove.hasWon()) {
+            return Mono.just(String.format("Started the game and immediately won because it was a '%d'",
+                    firstMove.getStartingNumber()))
+                    .doOnNext(System.out::println);
+        }
+
+        makeMove(firstMove.getStartingNumber());
 
         return Mono.just(String.format("Started game with number '%s'", firstMove))
                 .doOnNext(System.out::println);

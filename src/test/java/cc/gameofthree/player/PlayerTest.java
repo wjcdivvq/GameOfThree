@@ -22,6 +22,7 @@ public class PlayerTest {
         List<Integer> startingNumbers = IntStream.range(0, 5)
                 .boxed()
                 .map(x -> player.startGameWithRandomNumber(100))
+                .map(Player.FirstMoveResult::getStartingNumber)
                 .collect(Collectors.toList());
 
         assertThat(startingNumbers)
@@ -33,6 +34,7 @@ public class PlayerTest {
         List<Integer> startingNumbers = IntStream.range(0, 1000)
                 .boxed()
                 .map(x -> player.startGameWithRandomNumber(1))
+                .map(Player.FirstMoveResult::getStartingNumber)
                 .collect(Collectors.toList());
 
         assertThat(startingNumbers).allMatch(number -> number > 0);
@@ -44,6 +46,7 @@ public class PlayerTest {
         List<Integer> startingNumbers = IntStream.range(0, 1000)
                 .boxed()
                 .map(x -> player.startGameWithRandomNumber(upperBound))
+                .map(Player.FirstMoveResult::getStartingNumber)
                 .collect(Collectors.toList());
 
         assertThat(startingNumbers).allMatch(number -> number <= 5);
@@ -89,10 +92,25 @@ public class PlayerTest {
     }
 
     @Test
-    void shouldNotWhenWhenRespondingWithNumberOtherThanOne() {
+    void shouldNotWinWhenRespondingWithNumberOtherThanOne() {
         int moveFromOtherPlayer = 5;
         assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getResultingNumber()).isEqualTo(2);
         assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).hasWon()).isFalse();
+    }
+
+    @Test
+    void shouldWinImmediatelyIfGameStartsWithNumberOne() {
+        assertThat(player.startGameWithRandomNumber(1).hasWon()).isTrue();
+    }
+
+    @Test
+    void shouldNotWinImmediatlyWhenStartingWithNumberOtherThanOne() {
+        List<Player.FirstMoveResult> firstMoveResults = IntStream.range(0, 1000)
+                .boxed()
+                .map(x -> player.startGameWithRandomNumber(2))
+                .collect(Collectors.toList());
+
+        assertThat(firstMoveResults).anyMatch(firstMove -> !firstMove.hasWon());
     }
 
     private int getMoveResultNumber(int moveFromOtherPlayer) {
