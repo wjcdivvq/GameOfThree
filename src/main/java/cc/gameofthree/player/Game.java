@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Game {
+    private static final int DEFAULT_UPPER_BOUND = 10_000;
+
     private final Player player = new Player();
     private final MoveClient moveApi;
     private final String applicationName;
@@ -19,7 +21,7 @@ public class Game {
     }
 
     public String makeGameStart() {
-        return makeGameStart(100);
+        return makeGameStart(DEFAULT_UPPER_BOUND);
     }
 
     public String makeGameStart(int upperBound) {
