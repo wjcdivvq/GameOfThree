@@ -23,8 +23,9 @@ public class MoveController {
     }
 
     @PostMapping("/startGame")
-    public Mono<String> startGame() {
-        int firstMove = player.startGameWithRandomNumber();
+    public Mono<String> startGame(@RequestBody String upperBoundAsString) {
+        int upperBound = upperBoundAsString == null ? 100 : Integer.parseInt(upperBoundAsString);
+        int firstMove = player.startGameWithRandomNumber(upperBound);
 
         makeMove(firstMove);
 

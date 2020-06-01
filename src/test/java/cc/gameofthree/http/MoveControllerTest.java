@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,8 +32,15 @@ class MoveControllerTest {
     }
 
     @Test
-    void shouldStartTheGame() {
-        moveController.startGame().block();
+    void shouldStartTheGameWithSpecifiedUpperBound() {
+        moveController.startGame("100").block();
+
+        verify(moveApi).playerDidMove(anyInt());
+    }
+
+    @Test
+    void shouldStartTheGameWithoutUpperBound() {
+        moveController.startGame(null).block();
 
         verify(moveApi).playerDidMove(anyInt());
     }

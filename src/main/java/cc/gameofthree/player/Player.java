@@ -13,8 +13,8 @@ public class Player {
         this.random = new Random(seed);
     }
 
-    public int startGameWithRandomNumber() {
-        return random.nextInt(100); // TODO make configurable
+    public int startGameWithRandomNumber(int upperBound) {
+        return random.nextInt(upperBound+1);
     }
 
     public MoveResult makeMoveRespondingTo(int moveFromOtherPlayer) {
