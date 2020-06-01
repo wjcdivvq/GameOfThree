@@ -22,3 +22,8 @@ or
 ```
 docker-compose logs app2
 ```
+
+You can watch what happens if only one player is online if you stop one docker container.
+```
+docker-compose stop app2
+```
