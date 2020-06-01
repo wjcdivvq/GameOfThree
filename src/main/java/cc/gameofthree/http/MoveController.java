@@ -16,7 +16,7 @@ public class MoveController {
     }
 
     @PostMapping("/startGame")
-    public Mono<String> startGame(@RequestBody String upperBoundAsString) {
+    public Mono<String> startGame(@RequestBody(required = false) String upperBoundAsString) {
         return Mono.just(upperBoundAsString != null
                 ? game.makeGameStart(Integer.parseInt(upperBoundAsString))
                 : game.makeGameStart())

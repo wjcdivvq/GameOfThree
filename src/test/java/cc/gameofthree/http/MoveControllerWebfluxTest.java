@@ -25,4 +25,12 @@ class MoveControllerWebfluxTest {
                 .expectBody(String.class)
                 .isEqualTo("I received your move '4'. I added '-1', and answered with '1'.\nI am application 'app1' and my player won.");
     }
+
+    @Test
+    void shouldStartGame() {
+        webClient.post()
+                .uri("/startGame")
+                .exchange()
+                .expectStatus().isOk();
+    }
 }
