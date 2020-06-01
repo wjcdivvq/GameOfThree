@@ -32,7 +32,7 @@ public class Game {
 
         makeMove(firstMove.getStartingNumber());
 
-        return String.format("Started game with number '%s'", firstMove);
+        return String.format("Started game with number '%s'", firstMove.getStartingNumber());
     }
 
     public String makeMove(int moveNumber) {

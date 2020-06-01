@@ -33,4 +33,16 @@ class MoveControllerWebfluxTest {
                 .exchange()
                 .expectStatus().isOk();
     }
+
+    @Test
+    void shouldStartGameWithUpperBound() {
+        webClient.post()
+                .uri("/startGame")
+                .contentType(MediaType.TEXT_PLAIN)
+                .bodyValue("1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .isEqualTo("Started the game and immediately won because it was a '1'");
+    }
 }
