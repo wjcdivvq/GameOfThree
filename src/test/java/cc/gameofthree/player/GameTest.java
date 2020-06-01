@@ -40,7 +40,7 @@ class GameTest {
     }
 
     @Test
-    void shouldStartTheGameWithout() {
+    void shouldStartTheGameWithoutUpperBound() {
         game.makeGameStart();
 
         verify(moveApi).playerDidMove(anyInt());
