@@ -23,7 +23,7 @@ public class MoveClient {
                 .uri("/playerDidMove")
                 .bodyValue(String.valueOf(move))
                 .exchange()
-                .retryWhen(Retry.backoff(10, Duration.ofSeconds(5))
+                .retryWhen(Retry.backoff(10, Duration.ofSeconds(5)) //TODO make configurable
                         .doBeforeRetry(s -> System.out.println(String.format("Cannot connect to '%s', will retry...", otherPlayerUrl))))
                 .doOnError(throwable -> System.out.println("Failed to send move to other player."))
                 .then();
