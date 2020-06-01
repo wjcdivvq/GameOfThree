@@ -54,20 +54,30 @@ public class PlayerTest {
     }
 
     @Test
+    void shouldRespondToWithDifferenceAdded() {
+        assertThat(getMoveResultAddedNumber(9)).isEqualTo(0);
+        assertThat(getMoveResultAddedNumber(14)).isEqualTo(1);
+        assertThat(getMoveResultAddedNumber(31)).isEqualTo(-1);
+    }
+
+    @Test
     void shouldWinWhenReachingNumberOne() {
         int moveFromOtherPlayer = 4;
-        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber()).isEqualTo(1);
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getResultingNumber()).isEqualTo(1);
         assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).hasWon()).isTrue();
     }
 
     @Test
     void shouldNotWhenWhenRespondingWithNumberOtherThanOne() {
         int moveFromOtherPlayer = 5;
-        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber()).isEqualTo(2);
+        assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).getResultingNumber()).isEqualTo(2);
         assertThat(player.makeMoveRespondingTo(moveFromOtherPlayer).hasWon()).isFalse();
     }
 
     private int getMoveResultNumber(int moveFromOtherPlayer) {
-        return player.makeMoveRespondingTo(moveFromOtherPlayer).getNumber();
+        return player.makeMoveRespondingTo(moveFromOtherPlayer).getResultingNumber();
+    }
+    private int getMoveResultAddedNumber(int moveFromOtherPlayer) {
+        return player.makeMoveRespondingTo(moveFromOtherPlayer).getAddedNumber();
     }
 }

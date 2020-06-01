@@ -18,22 +18,30 @@ public class Player {
     }
 
     public MoveResult makeMoveRespondingTo(int moveFromOtherPlayer) {
-        return new MoveResult((moveFromOtherPlayer + 1) / 3);
+        int resultingNumber = (moveFromOtherPlayer + 1) / 3;
+        int addedNumber = resultingNumber * 3 - moveFromOtherPlayer;
+        return new MoveResult(resultingNumber, addedNumber);
     }
 
     public static class MoveResult {
-        private final int number;
+        private final int resultingNumber;
+        private final int addedNumber;
 
-        public MoveResult(int number) {
-            this.number = number;
+        public MoveResult(int resultingNumber, int addedNumber) {
+            this.resultingNumber = resultingNumber;
+            this.addedNumber = addedNumber;
         }
 
-        public int getNumber() {
-            return number;
+        public int getResultingNumber() {
+            return resultingNumber;
+        }
+
+        public int getAddedNumber() {
+            return addedNumber;
         }
 
         public boolean hasWon() {
-            return number == 1;
+            return resultingNumber == 1;
         }
     }
 }

@@ -42,9 +42,12 @@ public class MoveController {
 
     private void makeMove(int moveNumber) {
         Player.MoveResult move = player.makeMoveRespondingTo(moveNumber);
+        System.out.println(String.format("I added '%d', and answered with '%d'",
+                move.getAddedNumber(),
+                move.getResultingNumber()));
 
         if (!move.hasWon()) {
-            moveApi.playerDidMove(move.getNumber()).subscribe();
+            moveApi.playerDidMove(move.getResultingNumber()).subscribe();
         } else {
             System.out.println(String.format("I am application '%s' and my player won.", applicationName));
         }
