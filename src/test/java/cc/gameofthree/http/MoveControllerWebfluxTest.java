@@ -21,6 +21,7 @@ class MoveControllerWebfluxTest {
                 .bodyValue("4")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(String.class).isEqualTo("Received your move '4'");
+                .expectBody(String.class)
+                .isEqualTo("I received your move '4'. I added '-1', and answered with '1'.\nI am application 'app1' and my player won.");
     }
 }

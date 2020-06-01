@@ -25,38 +25,46 @@ public class MoveController {
     @PostMapping("/startGame")
     public Mono<String> startGame(@RequestBody String upperBoundAsString) {
         int upperBound = upperBoundAsString == null ? 100 : Integer.parseInt(upperBoundAsString);
-        Player.FirstMoveResult firstMove = player.startGameWithRandomNumber(upperBound);
 
-        if (firstMove.hasWon()) {
-            return Mono.just(String.format("Started the game and immediately won because it was a '%d'",
-                    firstMove.getStartingNumber()))
-                    .doOnNext(System.out::println);
-        }
-
-        makeMove(firstMove.getStartingNumber());
-
-        return Mono.just(String.format("Started game with number '%s'", firstMove))
+        return Mono.just(upperBound)
+                .map(this::makeGameStart)
                 .doOnNext(System.out::println);
     }
 
     @PostMapping(value = "/playerDidMove", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<String> playerDidMove(@RequestBody String moveNumber) {
-        makeMove(Integer.parseInt(moveNumber));
-
-        return Mono.just(String.format("Received your move '%s'", moveNumber))
+        return Mono.just(moveNumber)
+                .map(Integer::parseInt)
+                .map(this::makeMove)
                 .doOnNext(System.out::println);
     }
 
-    private void makeMove(int moveNumber) {
+    private String makeGameStart(int upperBound) {
+        Player.FirstMoveResult firstMove = player.startGameWithRandomNumber(upperBound);
+
+        if (firstMove.hasWon()) {
+            return String.format("Started the game and immediately won because it was a '%d'",
+                    firstMove.getStartingNumber());
+        }
+
+        makeMove(firstMove.getStartingNumber());
+
+        return String.format("Started game with number '%s'", firstMove);
+    }
+
+    private String makeMove(int moveNumber) {
         Player.MoveResult move = player.makeMoveRespondingTo(moveNumber);
-        System.out.println(String.format("I added '%d', and answered with '%d'",
+
+        final String response = String.format("I received your move '%d'. I added '%d', and answered with '%d'.",
+                moveNumber,
                 move.getAddedNumber(),
-                move.getResultingNumber()));
+                move.getResultingNumber());
 
         if (!move.hasWon()) {
             moveApi.playerDidMove(move.getResultingNumber()).subscribe();
+            return response;
         } else {
-            System.out.println(String.format("I am application '%s' and my player won.", applicationName));
+            return response + String.format("\nI am application '%s' and my player won.", applicationName);
         }
     }
 
