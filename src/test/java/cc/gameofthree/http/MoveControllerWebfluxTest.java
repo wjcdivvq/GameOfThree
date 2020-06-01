@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @WebFluxTest(controllers = MoveController.class)
-@ContextConfiguration(classes = {MoveClient.class, Game.class, MoveController.class})
+@ContextConfiguration(classes = {MoveClient.class, HttpConfig.class, Game.class, MoveController.class})
 class MoveControllerWebfluxTest {
     @Autowired
     WebTestClient webClient;
