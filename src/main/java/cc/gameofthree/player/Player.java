@@ -14,7 +14,7 @@ public class Player {
     }
 
     public int startGameWithRandomNumber(int upperBound) {
-        return random.nextInt(upperBound+1);
+        return random.nextInt(upperBound) + 1;
     }
 
     public MoveResult makeMoveRespondingTo(int moveFromOtherPlayer) {

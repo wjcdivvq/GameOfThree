@@ -21,11 +21,21 @@ public class PlayerTest {
     void shouldStartTheGameWithRandomNumber() {
         List<Integer> startingNumbers = IntStream.range(0, 5)
                 .boxed()
-                .map(x -> player.startGameWithRandomNumber(99))
+                .map(x -> player.startGameWithRandomNumber(100))
                 .collect(Collectors.toList());
 
         assertThat(startingNumbers)
-                .containsExactly(60, 48, 29, 47, 15);
+                .containsExactly(61, 49, 30, 48, 16);
+    }
+
+    @Test
+    void shouldStartTheGameWithNumberGreaterThanZero() {
+        List<Integer> startingNumbers = IntStream.range(0, 1000)
+                .boxed()
+                .map(x -> player.startGameWithRandomNumber(1))
+                .collect(Collectors.toList());
+
+        assertThat(startingNumbers).allMatch(number -> number > 0);
     }
 
     @Test
