@@ -46,6 +46,7 @@ public class Game {
                 move.getResultingNumber());
 
         if (!move.hasWon()) {
+            // Asynchronously inform the other player about the move
             moveApi.playerDidMove(move.getResultingNumber()).subscribe();
             return response;
         } else {
