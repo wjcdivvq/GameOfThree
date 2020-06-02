@@ -17,7 +17,7 @@ public class HttpConfig {
     }
 
     public String getOtherPlayerUrl() {
-        return env.getProperty("http.otherPlayerUrl", "http://localhost:8080");
+        return env.getProperty("http.otherPlayerUrl", "http://localhost:" + env.getProperty("server.port"));
     }
 
     public WebClient webClient() {
