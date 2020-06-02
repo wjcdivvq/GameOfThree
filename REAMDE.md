@@ -26,4 +26,11 @@ docker-compose logs app2
 You can watch what happens if only one player is online if you stop one docker container.
 ```
 docker-compose stop app2
+``` 
+
+If you want to watch the game playing at a non-instant speed,
+you can add an artificial delay to the http calls.
+In this specific example the application plays against itself instead of against another application.
+```
+docker run --rm -p 8081:8081 --env SPRING_APPLICATION_JSON='{"http.artificialDelayInMs":500,"server.port":8081}' gameofthree
 ```
