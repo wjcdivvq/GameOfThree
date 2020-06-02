@@ -39,23 +39,25 @@ docker run --rm -p 8081:8081 --env SPRING_APPLICATION_JSON='{"http.artificialDel
 Example output when running the game with just one player:
 ```
 Waiting for the game to start...
-Started game with number '448600937'
-I received your move '149533646'. I added '1', and answered with '49844549'.
-I received your move '49844549'. I added '1', and answered with '16614850'.
-I received your move '16614850'. I added '-1', and answered with '5538283'.
-I received your move '5538283'. I added '-1', and answered with '1846094'.
-I received your move '1846094'. I added '1', and answered with '615365'.
-I received your move '615365'. I added '1', and answered with '205122'.
-I received your move '205122'. I added '0', and answered with '68374'.
-I received your move '68374'. I added '-1', and answered with '22791'.
-I received your move '22791'. I added '0', and answered with '7597'.
-I received your move '7597'. I added '-1', and answered with '2532'.
-I received your move '2532'. I added '0', and answered with '844'.
-I received your move '844'. I added '-1', and answered with '281'.
-I received your move '281'. I added '1', and answered with '94'.
-I received your move '94'. I added '-1', and answered with '31'.
-I received your move '31'. I added '-1', and answered with '10'.
-I received your move '10'. I added '-1', and answered with '3'.
-I received your move '3'. I added '0', and answered with '1'.
+Started game with number '840570719'
+I received your move '840570719'. I added '1', and answered with '280190240'.
+I received your move '280190240'. I added '1', and answered with '93396747'.
+I received your move '93396747'. I added '0', and answered with '31132249'.
+I received your move '31132249'. I added '-1', and answered with '10377416'.
+I received your move '10377416'. I added '1', and answered with '3459139'.
+I received your move '3459139'. I added '-1', and answered with '1153046'.
+I received your move '1153046'. I added '1', and answered with '384349'.
+I received your move '384349'. I added '-1', and answered with '128116'.
+I received your move '128116'. I added '-1', and answered with '42705'.
+I received your move '42705'. I added '0', and answered with '14235'.
+I received your move '14235'. I added '0', and answered with '4745'.
+I received your move '4745'. I added '1', and answered with '1582'.
+I received your move '1582'. I added '-1', and answered with '527'.
+I received your move '527'. I added '1', and answered with '176'.
+I received your move '176'. I added '1', and answered with '59'.
+I received your move '59'. I added '1', and answered with '20'.
+I received your move '20'. I added '1', and answered with '7'.
+I received your move '7'. I added '-1', and answered with '2'.
+I received your move '2'. I added '1', and answered with '1'.
 I am application 'app1' and my player won.
 ```

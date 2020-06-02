@@ -32,7 +32,8 @@ public class Game {
                     firstMove.getStartingNumber());
         }
 
-        makeMove(firstMove.getStartingNumber());
+        // Asynchronously inform the other player about the starting move
+        moveApi.playerDidMove(firstMove.getStartingNumber()).subscribe();
 
         return String.format("Started game with number '%s'", firstMove.getStartingNumber());
     }
