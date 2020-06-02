@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Game {
-    private static final int DEFAULT_UPPER_BOUND = 10_000;
+    static final int DEFAULT_UPPER_BOUND = Integer.MAX_VALUE;
 
     private final Player player = new Player();
     private final MoveClient moveApi;
