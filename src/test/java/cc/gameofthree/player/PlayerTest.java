@@ -104,7 +104,7 @@ public class PlayerTest {
     }
 
     @Test
-    void shouldNotWinImmediatlyWhenStartingWithNumberOtherThanOne() {
+    void shouldNotWinImmediatelyWhenStartingWithNumberOtherThanOne() {
         List<Player.FirstMoveResult> firstMoveResults = IntStream.range(0, 1000)
                 .boxed()
                 .map(x -> player.startGameWithRandomNumber(2))
