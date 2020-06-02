@@ -45,12 +45,13 @@ public class Game {
                 move.getAddedNumber(),
                 move.getResultingNumber());
 
-        if (!move.hasWon()) {
-            // Asynchronously inform the other player about the move
-            moveApi.playerDidMove(move.getResultingNumber()).subscribe();
-            return response;
-        } else {
+        if (move.hasWon()) {
             return response + String.format("\nI am application '%s' and my player won.", applicationName);
         }
+
+        // Asynchronously inform the other player about the move
+        moveApi.playerDidMove(move.getResultingNumber()).subscribe();
+
+        return response;
     }
 }
